@@ -10,16 +10,14 @@ function checkProperty(obj, prop) {
 }
 
 function nestedProp(obj, path) {
-	const ret = path
-		.split('.')
-		.reduce((ret, prop, index, props) => {
-			if (!checkProperty(ret, prop)) {
-				const path = props.slice(0, index + 1).join('.');
-				throw new TypeError(`"$${path}" is not defined`);
-			}
+	const ret = path.split('.').reduce((ret, prop, index, props) => {
+		if (!checkProperty(ret, prop)) {
+			const path = props.slice(0, index + 1).join('.');
+			throw new TypeError(`"$${path}" is not defined`);
+		}
 
-			return ret[prop];
-		}, obj);
+		return ret[prop];
+	}, obj);
 
 	if (ALLOWED_TYPES.indexOf(typeof ret) === -1) {
 		throw new TypeError(`The "$${path}" property has an inappropriate type`);
