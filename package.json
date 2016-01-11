@@ -1,7 +1,7 @@
 {
   "name": "postcss-external-vars",
   "version": "1.0.1",
-  "description": "Inject external variables to your CSS",
+  "description": "PostCSS plugin for injecting external variables to your CSS",
   "license": "MIT",
   "repository": "dsblv/postcss-external-vars",
   "author": {

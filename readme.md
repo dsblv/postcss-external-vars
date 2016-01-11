@@ -1,6 +1,6 @@
 # postcss-external-vars [![Build Status](https://travis-ci.org/dsblv/postcss-external-vars.svg?branch=master)](https://travis-ci.org/dsblv/postcss-external-vars)
 
-> [PostCSS] plugin to inject external variables to your CSS.
+> [PostCSS] plugin for injecting external variables to your CSS.
 
 [PostCSS]: https://github.com/postcss/postcss
 
@@ -48,7 +48,7 @@ postcss([externalVars({data})])
 	});
 ```
 
-See [PostCSS] docs for examples for your environment.
+Check [PostCSS] docs out for examples in your preferred environment.
 
 
 ## Options
