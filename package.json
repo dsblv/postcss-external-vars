@@ -1,0 +1,38 @@
+{
+  "name": "postcss-external-vars",
+  "version": "1.0.0",
+  "description": "Inject external variables to your CSS",
+  "license": "MIT",
+  "repository": "dsblv/postcss-external-vars",
+  "author": {
+    "name": "Dmitriy Sobolev",
+    "email": "disobolev@icloud.com",
+    "url": "github.com/dsblv"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "xo && ava"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "postcss-plugin",
+    "postcss",
+    "css",
+    "external",
+    "variables",
+    "vars",
+    "inject",
+    "json"
+  ],
+  "dependencies": {
+    "postcss": "^5.0.14"
+  },
+  "devDependencies": {
+    "ava": "^0.8.0",
+    "xo": "^0.12.1"
+  }
+}
