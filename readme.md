@@ -20,6 +20,13 @@
 ```
 
 
+## Install
+
+```
+$ npm install postcss-external-vars
+```
+
+
 ## Usage
 
 ```js
