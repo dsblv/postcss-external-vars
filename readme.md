@@ -30,32 +30,50 @@ $ npm install postcss-external-vars
 ## Usage
 
 ```js
-const postcss = require('postcss');
 const externalVars = require('postcss-external-vars');
 
 const data = {
 	color: {
 		primary: '#bada55',
-		background: '#1337AF'
+		background: '#1337af'
 	}
 };
 
-postcss([externalVars({data})])
-	.process('.foo {color: $color.primary}')
-	.then(result => {
-		console.log(result.css);
-		//=> ".foo {color: #bada55}"
-	});
+const css = '.foo {color: $color.primary}';
+
+// Use stand-alone:
+const result = externalVars.process(css, {data}).css;
+//=> '.foo {color: #bada55}'
+
+// Or as PostCSS plugin:
+const postcss = require('postcss');
+
+const result = postcss([externalVars({data})]).process(css).css;
+//=> '.foo {color: #bada55}'
 ```
 
 Check [PostCSS] docs out for examples in your preferred environment.
 
 
-## Options
+## API
 
-### data
+### externalVars({opts})
+
+#### opts
+
+##### data
+
+Type: `object`  
+*Required*
 
 An `object` of properties to be used within your CSS.
+
+##### prefix
+
+Type: `string`  
+Default: `$`
+
+A prefix for variable names. May contain several characters.
 
 
 ## License

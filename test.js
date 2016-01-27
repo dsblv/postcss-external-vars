@@ -55,4 +55,13 @@ test('commas in declaration', t => {
 	return run(t, input, output, {data});
 });
 
+test('custom prefix', t => {
+	const data = {
+		color: '#bada55'
+	};
+	const prefix = '~~';
+
+	return run(t, 'a {color: ~~color}', 'a {color: #bada55}', {data, prefix});
+});
+
 test('no data provided case', t => run(t, 'a {color: #bada55}', 'a {color: #bada55}'));

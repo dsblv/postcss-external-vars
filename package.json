@@ -29,6 +29,7 @@
     "json"
   ],
   "dependencies": {
+    "escape-string-regexp": "^1.0.4",
     "postcss": "^5.0.14"
   },
   "devDependencies": {

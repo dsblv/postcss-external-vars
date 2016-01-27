@@ -1,9 +1,14 @@
 'use strict';
 const postcss = require('postcss');
+const escapeString = require('escape-string-regexp');
 
 const PLUGIN_NAME = 'external-vars';
 const ALLOWED_TYPES = ['string', 'number'];
-const VAR_REGEXP = /\$([^\$\,\)\; ]+)/g;
+
+function generateRegExp(prefix) {
+	const capture = '([^\\$\\,\\)\\; ]+)';
+	return new RegExp(escapeString(prefix) + capture, 'g');
+}
 
 function checkProperty(obj, prop) {
 	return typeof obj === 'object' && obj.hasOwnProperty(prop);
@@ -26,17 +31,19 @@ function nestedProp(obj, path) {
 	return ret;
 }
 
-function inject(string, obj) {
-	return string.replace(VAR_REGEXP, (match, path) => nestedProp(obj, path));
+function inject(string, obj, regexp) {
+	return string.replace(regexp, (match, path) => nestedProp(obj, path));
 }
 
 module.exports = postcss.plugin(PLUGIN_NAME, opts => {
 	opts = opts || {};
 
+	const regexp = generateRegExp(opts.prefix || '$');
+
 	return css => {
 		css.walkDecls(decl => {
 			try {
-				decl.value = inject(decl.value, opts.data);
+				decl.value = inject(decl.value, opts.data, regexp);
 			} catch (err) {
 				throw decl.error(err.message, {plugin: PLUGIN_NAME});
 			}
