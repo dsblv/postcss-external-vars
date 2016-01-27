@@ -3,7 +3,7 @@ const postcss = require('postcss');
 
 const PLUGIN_NAME = 'external-vars';
 const ALLOWED_TYPES = ['string', 'number'];
-const VAR_REGEXP = /\$([^\$ ]+)/g;
+const VAR_REGEXP = /\$([^\$\,\)\; ]+)/g;
 
 function checkProperty(obj, prop) {
 	return typeof obj === 'object' && obj.hasOwnProperty(prop);

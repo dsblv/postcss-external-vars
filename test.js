@@ -41,4 +41,18 @@ test('several properties per declaration', t => {
 	return run(t, 'body {padding: $padding.vertical $padding.horizontal}', 'body {padding: 50px 100px}', {data});
 });
 
+test('commas in declaration', t => {
+	const data = {
+		colors: {
+			top: '#bada55',
+			bottom: 'black'
+		}
+	};
+
+	const input = 'body {background: linear-gradient(top, $colors.top, $colors.bottom)}';
+	const output = 'body {background: linear-gradient(top, #bada55, black)}';
+
+	return run(t, input, output, {data});
+});
+
 test('no data provided case', t => run(t, 'a {color: #bada55}', 'a {color: #bada55}'));
