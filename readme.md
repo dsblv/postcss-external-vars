@@ -75,6 +75,14 @@ Default: `$`
 
 A prefix for variable names. May contain several characters.
 
+##### template
+
+Type: `boolean`  
+Default: `false`
+
+If true, all rules that do not involve variables will be omitted, and variables
+will not be resolved.
+
 
 ## License
 
