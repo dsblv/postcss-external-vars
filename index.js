@@ -37,13 +37,22 @@ function inject(string, obj, regexp) {
 
 module.exports = postcss.plugin(PLUGIN_NAME, opts => {
 	opts = opts || {};
+	if (!('template' in opts)) {
+		opts.template = false;
+	}
 
 	const regexp = generateRegExp(opts.prefix || '$');
 
 	return css => {
 		css.walkDecls(decl => {
 			try {
-				decl.value = inject(decl.value, opts.data, regexp);
+				if (opts.template) {
+					if (!decl.value.match(regexp)) {
+						decl.remove();
+					}
+				} else {
+					decl.value = inject(decl.value, opts.data, regexp);
+				}
 			} catch (err) {
 				throw decl.error(err.message, {plugin: PLUGIN_NAME});
 			}
