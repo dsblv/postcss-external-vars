@@ -66,16 +66,20 @@ test('custom prefix', t => {
 
 test('no data provided case', t => run(t, 'a {color: #bada55}', 'a {color: #bada55}'));
 
-test('fn.test()', t => {
-	t.true(fn.test('$yo'));
-	t.true(fn.test('!yo', {prefix: '!'}));
+test('fn.tester()', t => {
+	const defaultTest = fn.tester();
 
-	t.false(fn.test('!yo'));
-	t.false(fn.test('$yo', {prefix: '!'}));
+	t.true(defaultTest('$yo'));
+	t.false(defaultTest('!yo'));
+
+	const customTest = fn.tester({prefix: '!'});
+
+	t.true(customTest('!yo'));
+	t.false(customTest('$yo'));
 });
 
-test('fn.matches()', t => {
-	const res = fn.matches('$some $stuff');
+test('fn.matcher()', t => {
+	const res = fn.matcher()('$some $stuff');
 
 	t.same(res, ['some', 'stuff']);
 });

@@ -5,10 +5,10 @@ const execall = require('execall');
 
 const PLUGIN_NAME = 'external-vars';
 const ALLOWED_TYPES = ['string', 'number'];
+const CAPTURE_GROUP = '([^)};, ]+)';
 
-function makeRe(prefix) {
-	const capture = '([^)};, ]+)';
-	return new RegExp(escapeString(prefix) + capture, 'g');
+function makeRe(prefix, flags) {
+	return new RegExp(escapeString(prefix) + CAPTURE_GROUP, flags);
 }
 
 function checkProperty(obj, prop) {
@@ -39,7 +39,7 @@ function inject(string, obj, re) {
 const externalVars = postcss.plugin(PLUGIN_NAME, opts => {
 	opts = opts || {};
 
-	const re = makeRe(opts.prefix || '$');
+	const re = makeRe(opts.prefix || '$', 'g');
 
 	return css => {
 		css.walkDecls(decl => {
@@ -52,20 +52,18 @@ const externalVars = postcss.plugin(PLUGIN_NAME, opts => {
 	};
 });
 
-externalVars.test = (str, opts) => {
+externalVars.tester = opts => {
 	opts = opts || {};
 	const re = makeRe(opts.prefix || '$');
 
-	return re.test(str);
+	return str => re.test(str);
 };
 
-externalVars.matches = (str, opts) => {
+externalVars.matcher = opts => {
 	opts = opts || {};
-	const re = makeRe(opts.prefix || '$');
+	const re = makeRe(opts.prefix || '$', 'g');
 
-	return execall(re, str).map(function (res) {
-		return res.sub[0];
-	});
+	return str => execall(re, str).map(res => res.sub[0]);
 };
 
 module.exports = externalVars;

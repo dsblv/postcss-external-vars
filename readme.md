@@ -76,16 +76,16 @@ Default: `$`
 A prefix for variable names. May contain several characters.
 
 
-### externalVars.test(string, [opts])
+### externalVars.tester([opts])
 
-Check if the `string` has any variables in it. Returns `boolean`.
+Returns a `function` that will accept `string` to check if it contains any variables and return `boolean`. Useful to filter your css declarations before processing.
 
 [Options](#opts) are the same.
 
 
-### externalVars.matches(string, [opts])
+### externalVars.matcher([opts])
 
-Return an `array` of all the matched variable names within the `string`.
+Returns a `function` that will accept `string` and return an `array` of all the matched variable names within it.
 
 [Options](#opts) are the same.
 
