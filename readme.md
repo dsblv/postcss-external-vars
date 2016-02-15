@@ -57,7 +57,7 @@ Check [PostCSS] docs out for examples in your preferred environment.
 
 ## API
 
-### externalVars({opts})
+### externalVars([opts])
 
 #### opts
 
@@ -74,6 +74,20 @@ Type: `string`
 Default: `$`
 
 A prefix for variable names. May contain several characters.
+
+
+### externalVars.tester([opts])
+
+Returns a `function` that will accept `string` to check if it contains any variables and return `boolean`. Useful to filter your css declarations before processing.
+
+[Options](#opts) are the same.
+
+
+### externalVars.matcher([opts])
+
+Returns a `function` that will accept `string` and return an `array` of all the matched variable names within it.
+
+[Options](#opts) are the same.
 
 
 ## License
