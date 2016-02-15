@@ -30,6 +30,7 @@
   ],
   "dependencies": {
     "escape-string-regexp": "^1.0.4",
+    "execall": "^1.0.0",
     "postcss": "^5.0.14"
   },
   "devDependencies": {

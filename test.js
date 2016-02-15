@@ -1,10 +1,10 @@
 import postcss from 'postcss';
 import test from 'ava';
 
-import plugin from './';
+import fn from './';
 
 function run(t, input, output, opts = {}) {
-	return postcss([plugin(opts)])
+	return postcss([fn(opts)])
 		.process(input)
 		.then(result => {
 			t.same(result.css, output);
@@ -65,3 +65,17 @@ test('custom prefix', t => {
 });
 
 test('no data provided case', t => run(t, 'a {color: #bada55}', 'a {color: #bada55}'));
+
+test('fn.test()', t => {
+	t.true(fn.test('$yo'));
+	t.true(fn.test('!yo', {prefix: '!'}));
+
+	t.false(fn.test('!yo'));
+	t.false(fn.test('$yo', {prefix: '!'}));
+});
+
+test('fn.matches()', t => {
+	const res = fn.matches('$some $stuff');
+
+	t.same(res, ['some', 'stuff']);
+});
